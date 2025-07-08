@@ -130,5 +130,30 @@ int main() {
     else
     printf("Resultado: Empate!\n");
 
+    /*  outro possivel criterio: 
+    
+       printf("\n--- Comparação de Cartas (Critério: PIB per capita) ---\n");
+       printf("Carta 1 - %s: R$ %.2f\n", nomeCidade1, pibc1);
+       printf("Carta 2 - %s: R$ %.2f\n", nomeCidade2, pibc2);
+       if (pibc1 > pibc2)
+       printf("Resultado: Carta 1 (%s) venceu!\n", nomeCidade1);
+       else if (pibc2 > pibc1)
+       printf("Resultado: Carta 2 (%s) venceu!\n", nomeCidade2);
+       else
+       printf("Resultado: Empate!\n"); */
+
+       /* Exemplo com critério onde o menor vence:
+   
+       printf("\n--- Comparação de Cartas (Critério: Densidade Populacional - menor vence) ---\n");
+       printf("Carta 1 - %s: %.2f hab/km²\n", nomeCidade1, densidadep1);
+       printf("Carta 2 - %s: %.2f hab/km²\n", nomeCidade2, densidadep2);
+       if (densidadep1 < densidadep2)
+       printf("Resultado: Carta 1 (%s) venceu!\n", nomeCidade1);
+       else if (densidadep2 < densidadep1)
+       printf("Resultado: Carta 2 (%s) venceu!\n", nomeCidade2);
+       else
+       printf("Resultado: Empate!\n"); */ 
+   
+
     return 0;
 }
