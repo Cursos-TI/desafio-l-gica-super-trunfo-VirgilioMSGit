@@ -1,0 +1,122 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+
+// alterado algumas boas partes para ficar menor e mais direto!
+
+
+int main() {
+    // Cadastro das cartas
+    char nome1[100], nome2[100];
+    unsigned int pop1, pop2;
+    float area1, area2;
+    float pib1, pib2;
+    int pontos1, pontos2;
+    float densidade1, densidade2;
+
+    // Carta 1
+    printf("=== Cadastro da Carta 1 ===\n");
+    printf("Nome da Cidade: ");
+    scanf(" %[^\n]", nome1);
+    printf("População: ");
+    scanf("%u", &pop1);
+    printf("Área (km²): ");
+    scanf("%f", &area1);
+    printf("PIB (em bilhões R$): ");
+    scanf("%f", &pib1);
+    printf("Pontos Turísticos: ");
+    scanf("%d", &pontos1);
+    densidade1 = pop1 / area1;
+
+    // Carta 2
+    printf("\n=== Cadastro da Carta 2 ===\n");
+    printf("Nome da Cidade: ");
+    scanf(" %[^\n]", nome2);
+    printf("População: ");
+    scanf("%u", &pop2);
+    printf("Área (km²): ");
+    scanf("%f", &area2);
+    printf("PIB (em bilhões R$): ");
+    scanf("%f", &pib2);
+    printf("Pontos Turísticos: ");
+    scanf("%d", &pontos2);
+    densidade2 = pop2 / area2;
+
+    srand(time(NULL));
+
+    // Seleção dos atributos (sem laços!)
+    int attr1 = 0, attr2 = 0;
+    printf("\n=== Menu de Atributos ===\n");
+    printf("1 - População\n2 - Área\n3 - PIB\n4 - Pontos Turísticos\n5 - Densidade Demográfica (menor vence)\n");
+
+    printf("\nEscolha o PRIMEIRO atributo: ");
+    scanf("%d", &attr1);
+    if (attr1 < 1 || attr1 > 5) {
+        printf("Atributo inválido. Encerrando programa.\n");
+        return 1;
+    }
+
+    printf("\nEscolha o SEGUNDO atributo (diferente do primeiro): ");
+    scanf("%d", &attr2);
+    if (attr2 < 1 || attr2 > 5 || attr2 == attr1) {
+        printf("Atributo inválido ou repetido. Encerrando programa.\n");
+        return 1;
+    }
+
+    // Pegando os valores dos atributos escolhidos
+    float v1_a1 = 0, v2_a1 = 0, v1_a2 = 0, v2_a2 = 0;
+
+    // Atributo 1
+    switch (attr1) {
+        case 1: v1_a1 = pop1; v2_a1 = pop2; break;
+        case 2: v1_a1 = area1; v2_a1 = area2; break;
+        case 3: v1_a1 = pib1; v2_a1 = pib2; break;
+        case 4: v1_a1 = pontos1; v2_a1 = pontos2; break;
+        case 5: v1_a1 = densidade1; v2_a1 = densidade2; break;
+    }
+
+    // Atributo 2
+    switch (attr2) {
+        case 1: v1_a2 = pop1; v2_a2 = pop2; break;
+        case 2: v1_a2 = area1; v2_a2 = area2; break;
+        case 3: v1_a2 = pib1; v2_a2 = pib2; break;
+        case 4: v1_a2 = pontos1; v2_a2 = pontos2; break;
+        case 5: v1_a2 = densidade1; v2_a2 = densidade2; break;
+    }
+
+    int pontosC1 = 0, pontosC2 = 0;
+
+    // Comparação do primeiro atributo
+    (attr1 == 5)
+        ? ((v1_a1 < v2_a1) ? pontosC1++ : (v2_a1 < v1_a1 ? pontosC2++ : 0))
+        : ((v1_a1 > v2_a1) ? pontosC1++ : (v2_a1 > v1_a1 ? pontosC2++ : 0));
+
+    // Comparação do segundo atributo
+    (attr2 == 5)
+        ? ((v1_a2 < v2_a2) ? pontosC1++ : (v2_a2 < v1_a2 ? pontosC2++ : 0))
+        : ((v1_a2 > v2_a2) ? pontosC1++ : (v2_a2 > v1_a2 ? pontosC2++ : 0));
+
+    // Soma dos valores comparados
+    float soma1 = v1_a1 + v1_a2;
+    float soma2 = v2_a1 + v2_a2;
+
+    // Exibição dos resultados
+    printf("\n=== RESULTADO ===\n");
+
+    printf("\n%s:\nAtributos: %.2f e %.2f | Soma: %.2f\n", nome1, v1_a1, v1_a2, soma1);
+    printf("%s:\nAtributos: %.2f e %.2f | Soma: %.2f\n", nome2, v2_a1, v2_a2, soma2);
+
+    if (soma1 > soma2)
+        printf("\nVENCEDOR: %s \n", nome1);
+    else if (soma2 > soma1)
+        printf("\nVENCEDOR: %s \n", nome2);
+    else {
+        int sorte = rand() % 2;
+        printf("\nEMPATE! Sorteando...\n");
+        printf("VENCEDOR: %s \n", sorte == 0 ? nome1 : nome2);
+    }
+
+    return 0;
+}
